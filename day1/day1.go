@@ -38,8 +38,8 @@ func main() {
 		last := scanner.Text()[lastIndex]
 
 		// Concatenate digits and add the parsed number to the part one result
-		parsedNumber, _ := strconv.ParseInt(fmt.Sprintf("%c%c", first, last), 10, 32)
-		resultPartOne += int(parsedNumber)
+		parsedNumber, _ := strconv.Atoi(string([]byte{first, last}))
+		resultPartOne += parsedNumber
 
 		// Iterate through the digits map
 		for name, digit := range digits {
@@ -57,8 +57,8 @@ func main() {
 		}
 
 		// Concatenate digits and add the parsed number to the part two result
-		parsedNumber, _ = strconv.ParseInt(fmt.Sprintf("%c%c", first, last), 10, 32)
-		resultPartTwo += int(parsedNumber)
+		parsedNumber, _ = strconv.Atoi(string([]byte{first, last}))
+		resultPartTwo += parsedNumber
 	}
 
 	fmt.Printf("Part one: %d\nPart two: %d\n", resultPartOne, resultPartTwo)
