@@ -4,21 +4,10 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strconv"
 	"strings"
 )
 
-var digits = map[string]byte{
-	"one":   '1',
-	"two":   '2',
-	"three": '3',
-	"four":  '4',
-	"five":  '5',
-	"six":   '6',
-	"seven": '7',
-	"eight": '8',
-	"nine":  '9',
-}
+var digits = [...]string{"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"}
 
 func main() {
 	file, _ := os.Open("day1/input.txt")
@@ -31,34 +20,32 @@ func main() {
 	for scanner.Scan() {
 		// Get the first digit literal from the scanned line
 		firstIndex := strings.IndexAny(scanner.Text(), "0123456789")
-		first := scanner.Text()[firstIndex]
+		first := int(scanner.Text()[firstIndex] - '0')
 
 		// Get the last digit literal from the scanned line
 		lastIndex := strings.LastIndexAny(scanner.Text(), "0123456789")
-		last := scanner.Text()[lastIndex]
+		last := int(scanner.Text()[lastIndex] - '0')
 
-		// Concatenate digits and add the parsed number to the part one result
-		parsedNumber, _ := strconv.Atoi(string([]byte{first, last}))
-		resultPartOne += parsedNumber
+		// Calculate the part one result
+		resultPartOne += 10*first + last
 
-		// Iterate through the digits map
-		for name, digit := range digits {
-			// Change the first digit if the name is before the first digit literal or any other name from the map
+		// Iterate through the digits array
+		for i, name := range digits {
+			// Change the first digit if the name is before the first digit literal or any other name from the digits array
 			if index := strings.Index(scanner.Text(), name); index < firstIndex && index >= 0 {
 				firstIndex = index
-				first = digit
+				first = i + 1
 			}
 
-			// Change the last digit if the name is after the last digit literal or any other name from the map
+			// Change the last digit if the name is after the last digit literal or any other name from the digits array
 			if index := strings.LastIndex(scanner.Text(), name); index > lastIndex && index >= 0 {
 				lastIndex = index
-				last = digit
+				last = i + 1
 			}
 		}
 
-		// Concatenate digits and add the parsed number to the part two result
-		parsedNumber, _ = strconv.Atoi(string([]byte{first, last}))
-		resultPartTwo += parsedNumber
+		// Calculate the part two result
+		resultPartTwo += 10*first + last
 	}
 
 	fmt.Printf("Part one: %d\nPart two: %d\n", resultPartOne, resultPartTwo)
