@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
 	"strconv"
@@ -13,7 +12,7 @@ func main() {
 	defer file.Close()
 
 	var s scanner.Scanner
-	s.Init(bufio.NewReader(file))
+	s.Init(file)
 	s.Whitespace ^= 1 << '\n'
 
 	gameID := 1
