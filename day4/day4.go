@@ -13,6 +13,7 @@ func main() {
 
 	var s scanner.Scanner
 	s.Init(file)
+	s.Mode = scanner.ScanInts
 	s.Whitespace ^= 1 << '\n'
 
 	// Flag that determines card section
