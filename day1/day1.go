@@ -48,5 +48,6 @@ func main() {
 		resultPartTwo += 10*first + last
 	}
 
-	fmt.Printf("Part one: %d\nPart two: %d\n", resultPartOne, resultPartTwo)
+	fmt.Printf("Part one: %d\n", resultPartOne)
+	fmt.Printf("Part two: %d\n", resultPartTwo)
 }
